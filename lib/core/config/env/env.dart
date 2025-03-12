@@ -2,7 +2,7 @@ import 'package:envied/envied.dart';
 
 part 'env.g.dart';
 
-// Dev
+//* Dev environnement
 @Envied(path: '.env.dev')
 abstract class DevEnv {
   @EnviedField(varName: 'BASE_URL', obfuscate: true)
@@ -10,11 +10,12 @@ abstract class DevEnv {
   static final String openWeatherAccessToken = _ProdEnv.openWeatherAccessToken;
 }
 
-// Prod
+//* Prod environnement
 @Envied(path: '.env.prod')
 abstract class ProdEnv {
-  @EnviedField(varName: 'BASE_URL', obfuscate: true)
+  @EnviedField(varName: 'BASE_URL', obfuscate: true) //* URL OPENWEATH
   static final String baseUrl = _ProdEnv.baseUrl;
-  @EnviedField(varName: 'OPENWEATHER_ACCESS_TOKEN', obfuscate: true)
+  @EnviedField(
+      varName: 'OPENWEATHER_ACCESS_TOKEN', obfuscate: true) //* TOKEN OPENWEATH
   static final String openWeatherAccessToken = _ProdEnv.openWeatherAccessToken;
 }
