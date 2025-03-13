@@ -20,8 +20,8 @@ class WeatherInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+      margin: EdgeInsets.symmetric(vertical: 10.h),
+      padding: EdgeInsets.symmetric(vertical: 35.h, horizontal: 12.w),
       decoration: BoxDecoration(
         color: whiteColor.withValues(alpha: .2),
         borderRadius: BorderRadius.circular(25.r),

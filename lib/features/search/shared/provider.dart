@@ -5,6 +5,7 @@ import '../applications/city_location_notifier.dart';
 import '../infrastructure/search_remote_service.dart';
 import '../infrastructure/search_repository.dart';
 
+//* Ce fichier configure l'injection de dépendances
 final searchRemoteServiceProvider = Provider<SearchRemoteService>(
   (ref) => SearchRemoteService(
     ref.watch(dioProvider),

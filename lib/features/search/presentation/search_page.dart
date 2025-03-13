@@ -1,12 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
+import '../../../theme/theme.dart';
 
 import '../../../core/presentation/widgets/widgets.dart';
 import '../domain/result_city.dart';
 import '../shared/provider.dart';
 
+//* Search ville Page
 @RoutePage()
 class SearchPage extends StatefulHookConsumerWidget {
   const SearchPage({super.key});
@@ -37,9 +41,26 @@ class _SearchPageState extends ConsumerState<SearchPage> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-        "Rechercher une ville",
-      )),
+        foregroundColor: whiteColor,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
+          "Rechercher une ville",
+          style: theme.textTheme.headlineSmall?.copyWith(
+            color: whiteColor,
+            fontSize: 24,
+          ),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios,
+              color: whiteColor), // Forcer la couleur en blanc
+          onPressed: () => context.router.pop(),
+        ),
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Theme.of(context).colorScheme.primaryContainer,
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -48,10 +69,10 @@ class _SearchPageState extends ConsumerState<SearchPage> {
               controller: _cityController,
               decoration: InputDecoration(
                 hintText: "Entrez une ville...",
-                fillColor: Colors.white,
+                fillColor: whiteColor,
                 filled: true,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.search),
@@ -77,15 +98,29 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                       child: ListTile(
                         title: Text(
                           "${city.name}, ${city.country}",
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            color: blackColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
                         ),
-                        subtitle: Text("Lat: ${city.lat}, Lon: ${city.lon}"),
+                        subtitle: Text(
+                          "${city.localNames!.ar}, ",
+                          style: theme.textTheme.labelMedium?.copyWith(
+                            color: theme.colorScheme.primary,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
+                          textDirection: TextDirection.rtl,
+                        ),
                         onTap: () => _onCitySelected(city),
                       ),
                     );
                   }
                   return Text('Ville non trouvée',
                       style: theme.textTheme.labelMedium?.copyWith(
-                        color: Colors.red,
+                        color: theme.colorScheme.error,
+                        fontSize: 12,
                       ));
                 })
           ],

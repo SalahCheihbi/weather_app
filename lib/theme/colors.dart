@@ -15,3 +15,6 @@ const lightInfoColor = Color(0xFFC7D8E1);
 //? Success
 const darkSuccessColor = Color(0xFF2A9949);
 const lightSuccessColor = Color(0xFFDEF7E5);
+
+
+//* File colors

@@ -22,16 +22,6 @@ class HomePage extends StatefulHookConsumerWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   Future.microtask(() async {
-  //     await ref
-  //         .read(currentWeatherNotifier.notifier)
-  //         .getCurrentWeather(lat: lat, lon: lon);
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     final lat = useState(34.01325);

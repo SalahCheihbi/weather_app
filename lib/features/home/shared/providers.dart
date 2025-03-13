@@ -5,6 +5,7 @@ import '../../../core/shared/provider.dart';
 import '../applications/weekly_weather_notifier.dart';
 import '../infrastructure/home_remote_service.dart';
 
+//* Ce fichier configure l'injection de dépendances
 final homeRemoteServiceProvider = Provider<HomeRemoteService>(
   (ref) => HomeRemoteService(
     ref.watch(dioProvider),
