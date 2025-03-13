@@ -45,7 +45,7 @@ class _CustomBottomSheetWidgetState
       height: 350.h,
       color: whiteColor,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30),
+        padding: const EdgeInsets.only(top: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -59,68 +59,69 @@ class _CustomBottomSheetWidgetState
                 ),
               ),
             ),
-            20.verticalSpace,
+            30.verticalSpace,
             Padding(
-              padding: const EdgeInsets.only(top: 20, left: 20),
+              padding: const EdgeInsets.only(left: 20),
               child: SizedBox(
-                  height: 160.h,
-                  child: state.maybeMap(
-                    orElse: () => SizedBox.shrink(),
-                    loadInProgress: (_) => Skeletonizer(
-                      enabled: true,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, item) => CustomWeeklyItemWidget(
-                            tempMax: 0,
-                            tempMin: 0,
-                            icon: '',
-                            day: '',
-                            temp: 20,
-                            description: ''),
-                        separatorBuilder: (context, item) => 40.horizontalSpace,
-                        itemCount: 4,
-                      ),
+                height: 200.h,
+                child: state.maybeMap(
+                  orElse: () => SizedBox.shrink(),
+                  loadInProgress: (_) => Skeletonizer(
+                    enabled: true,
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, item) => CustomWeeklyItemWidget(
+                          tempMax: 0,
+                          tempMin: 0,
+                          icon: '',
+                          day: '',
+                          temp: 20,
+                          description: ''),
+                      separatorBuilder: (context, item) => 40.horizontalSpace,
+                      itemCount: 4,
                     ),
-                    loadSuccess: (value) {
-                      final today = DateTime.now();
+                  ),
+                  loadSuccess: (value) {
+                    final today = DateTime.now();
 
-                      final upcomingDays = value.resultWeekly.listWeekly!
-                          .map((item) {
-                            final itemDate =
-                                DateTime.fromMillisecondsSinceEpoch(
-                                    item.dt! * 1000);
-                            return DateTime(
-                                itemDate.year, itemDate.month, itemDate.day);
-                          })
-                          .toSet()
-                          .where((date) => date.isAfter(today))
-                          .take(6)
-                          .toList();
-                      return ListView.separated(
-                        physics: BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          final day = upcomingDays[index];
-                          final dayName = DateFormat.E('fr_FR').format(day);
-                          final resultWeekly =
-                              value.resultWeekly.listWeekly![index];
+                    final upcomingDays = value.resultWeekly.listWeekly!
+                        .map((item) {
+                          final itemDate = DateTime.fromMillisecondsSinceEpoch(
+                              item.dt! * 1000);
+                          return DateTime(
+                              itemDate.year, itemDate.month, itemDate.day);
+                        })
+                        .toSet()
+                        .where((date) => date.isAfter(today))
+                        .take(6)
+                        .toList();
+                    return ListView.separated(
+                      shrinkWrap: true,
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        final day = upcomingDays[index];
+                        final dayName = DateFormat.E('fr_FR').format(day);
+                        final resultWeekly =
+                            value.resultWeekly.listWeekly![index];
 
-                          return CustomWeeklyItemWidget(
-                            icon: resultWeekly.weather!.first.icon!,
-                            day: dayName.toString(),
-                            tempMax: resultWeekly.main!.tempMax,
-                            tempMin: resultWeekly.main!.tempMin,
-                            temp: resultWeekly.main!.temp!,
-                            description: resultWeekly.weather!.first.description
-                                .toString(),
-                          );
-                        },
-                        separatorBuilder: (context, index) =>
-                            25.horizontalSpace,
-                        itemCount: upcomingDays.length,
-                      );
-                    },
-                  )),
+                        return CustomWeeklyItemWidget(
+                          icon: resultWeekly.weather!.first.icon!,
+                          day: dayName.toString(),
+                          tempMax: resultWeekly.main!.tempMax,
+                          tempMin: resultWeekly.main!.tempMin,
+                          temp: resultWeekly.main!.temp!,
+                          description: resultWeekly.weather!.first.description
+                              .toString(),
+                        );
+                      },
+                      separatorBuilder: (context, index) => 25.horizontalSpace,
+                      itemCount: upcomingDays.length,
+                    );
+                  },
+                ),
+              ),
             )
           ],
         ),
