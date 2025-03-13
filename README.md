@@ -38,32 +38,45 @@ L'application utilise des fichiers .env pour stocker les variables sensibles :
 📌 Fonctionnalités
 
  Récupération des données météo (actuelles & prévisions) 📊
+ 
 ✔️ Affichage des informations en français 🌍
+
 ✔️ Gestion des appels API avec Dio et conversion en DTO
 
 
 ## Installation
 
-1-Cloner le projet
+1. Cloner le projet
 
 ```
 git clone https://github.com/votre-repo/weather-app.git
 cd weather-app
 ```
     
-2-Créer un fichier .env et configurer l’API Key
+2. Créer un fichier .env et configurer l’API Key
 
-3-Lancer l’application
+3. Générer les fichiers nécessaires avec build_runner
+```
+flutter clean
+dart run build_runner build -d
+flutter pub get
+```
+    
+
+4. Lancer l’application
 ```
 flutter run
 ```
 
 
 📌 Technologies utilisées
-Flutter 🚀
-Dio pour les requêtes HTTP 🔗
-Architecture DDD 🏗️
-Gestion d’environnement avec .env 🔒
+-Flutter 🚀
+
+-Dio pour les requêtes HTTP 🔗
+
+-Architecture DDD 🏗️
+
+-Gestion d’environnement avec .env 🔒
 
 ## Authors
 
