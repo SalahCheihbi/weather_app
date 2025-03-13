@@ -1,19 +1,70 @@
 name: weather_app
-description: "A new Flutter project."
-publish_to: 'none'
+description: "A Weather app mini project."
+publish_to: "none"
 version: 0.1.0
 
 environment:
   sdk: ^3.6.0
 
 dependencies:
+  auto_route: ^10.0.1
+  dio: ^5.8.0+1
+  envied: ^1.1.1
+  flex_color_scheme: ^8.1.1
   flutter:
     sdk: flutter
+  flutter_hooks: ^0.21.2
+  flutter_screenutil: ^5.9.3
+  flutter_svg: ^2.0.17
+  fpdart: ^1.1.1
+  freezed_annotation: ^2.4.4
+  hooks_riverpod: ^2.6.1
+  intl: ^0.20.2
+  json_annotation: ^4.9.0
+  logger: ^2.5.0
+  skeletonizer: ^1.4.3
 
 dev_dependencies:
+  auto_route_generator: null
+  build_runner: ^2.4.15
+  custom_lint: ^0.7.0
+  envied_generator: ^1.1.1
+  flutter_gen_runner: ^5.5.0+1
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  freezed: ^2.5.8
+  json_serializable: ^6.9.4
+  lint: ^2.3.0
+  riverpod_lint: ^2.6.2
 
 flutter:
   uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/images/png/
+    - assets/images/svg/
+    - assets/icons/svg/
+    - assets/icons/svg/night/
+    - assets/icons/svg/day/
+
+  fonts:
+    - family: MonaSans
+      fonts:
+        - asset: assets/fonts/MonaSans-Black.otf
+          weight: 900
+        - asset: assets/fonts/MonaSans-ExtraBold.otf
+          weight: 800
+        - asset: assets/fonts/MonaSans-Bold.otf
+          weight: 700
+        - asset: assets/fonts/MonaSans-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/MonaSans-Medium.otf
+          weight: 500
+        - asset: assets/fonts/MonaSans-Regular.otf
+          weight: 400
+        - asset: assets/fonts/MonaSans-Light.otf
+          weight: 300
+        - asset: assets/fonts/MonaSans-ExtraLight.otf
+          weight: 200

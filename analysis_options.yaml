@@ -1,1 +1,21 @@
 include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    missing_return: error
+    must_be_immutable: error
+    must_call_super: error
+    invalid_use_of_protected_member: error
+    parameter_assignments: error
+    sort_unnamed_constructors_first: ignore
+    sort_pub_dependencies: ignore
+    always_use_package_imports: ignore
+    invalid_annotation_target: ignore
+
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*.gen.dart"
+
+  plugins:
+    - custom_lint
