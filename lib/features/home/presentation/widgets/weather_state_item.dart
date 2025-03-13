@@ -33,7 +33,7 @@ class WeatherStateItem extends StatelessWidget {
               style: theme.textTheme.bodyLarge?.copyWith(
                 color: whiteColor,
                 fontWeight: FontWeight.w500,
-                fontSize: 10.sp,
+                fontSize: 14.sp,
               ),
             ),
           ],
@@ -45,7 +45,7 @@ class WeatherStateItem extends StatelessWidget {
           style: theme.textTheme.bodySmall?.copyWith(
             color: whiteColor.withValues(alpha: .7),
             fontWeight: FontWeight.w700,
-            fontSize: 8.sp,
+            fontSize: 10.sp,
           ),
         ),
       ],

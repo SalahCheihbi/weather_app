@@ -3,16 +3,24 @@ import 'package:flutter/material.dart';
 
 import '../gen/fonts.gen.dart';
 
+const _primary = Color(0xff6a5acd);
+const _primaryContainer = Color(0xff483d8b);
+const _secondary = Color(0xff9370db);
+const _secondaryContainer = Color(0xffb0a3e0);
+const _tertiary = Color(0xffffd700);
+const _tertiaryContainer = Color(0xfffff8dc);
+const _error = Color(0xffb00020);
+
 final lightTheme = FlexThemeData.light(
         colors: const FlexSchemeColor(
-          primary: Color(0xff6a5acd),
-          primaryContainer: Color(0xff483d8b),
-          secondary: Color(0xff9370db),
-          secondaryContainer: Color(0xffb0a3e0),
-          tertiary: Color(0xffffd700),
-          tertiaryContainer: Color(0xfffff8dc),
+          primary: _primary,
+          primaryContainer: _primaryContainer,
+          secondary: _secondary,
+          secondaryContainer: _secondaryContainer,
+          tertiary: _tertiary,
+          tertiaryContainer: _tertiaryContainer,
           appBarColor: Color(0xffb0a3e0),
-          error: Color(0xffb00020),
+          error: _error,
         ),
         surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
         blendLevel: 7,
@@ -30,3 +38,5 @@ final lightTheme = FlexThemeData.light(
         bottomSheetTheme: BottomSheetThemeData(
   backgroundColor: Colors.transparent,
 ));
+
+//* theme Light mode
