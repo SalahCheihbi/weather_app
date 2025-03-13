@@ -11,15 +11,10 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           initial: true,
-          page: MainRoute.page,
-          children: [
-            AutoRoute(
-              page: HomeRoute.page,
-            ),
-            AutoRoute(
-              page: SettingsRoute.page,
-            ),
-          ],
+          page: HomeRoute.page,
+        ),
+        AutoRoute(
+          page: SearchRoute.page,
         ),
       ];
 }

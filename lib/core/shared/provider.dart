@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:weather_app/core/infrastructure/helpers/dio_interceptor.dart';
 
 import '../presentation/routes/app_router.dart';
 
@@ -14,8 +13,4 @@ final appRouterProvider = Provider<AppRouter>(
 
 final dioProvider = Provider<Dio>(
   (ref) => Dio(),
-);
-
-final dioInterceptorProvider = Provider<DioInterceptor>(
-  (ref) => DioInterceptor(),
 );
