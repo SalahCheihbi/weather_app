@@ -111,7 +111,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             )
                           ],
                         ),
-                        30.verticalSpace,
+                        10.verticalSpace,
                         WeatherInfoCard(
                           windSpeed: currentResultWeather.wind!.speed!,
                           sunset: currentResultWeather.sys!.sunset!,

@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:weather_app/core/infrastructure/extensions/temperature_extension.dart';
+import 'package:weather_app/features/home/presentation/widgets/custom_tomorrow_widget.dart';
 import 'custom_weekly_item.dart';
 import '../../../../theme/colors.dart';
 
@@ -42,44 +44,48 @@ class _CustomBottomSheetWidgetState
 
     return Container(
       width: double.infinity,
-      height: 350.h,
+      height: 400.h,
       color: whiteColor,
       child: Padding(
-        padding: const EdgeInsets.only(top: 30),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.w),
-              child: Text(
-                'Prévisions pour les prochains jours',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  color: blackColor,
-                  fontSize: 14.r,
+        padding: const EdgeInsets.only(top: 26),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
+                child: Text(
+                  'Prévisions pour les prochains jours',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: blackColor,
+                    fontSize: 14.r,
+                  ),
                 ),
               ),
-            ),
-            30.verticalSpace,
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: SizedBox(
-                height: 200.h,
+              20.verticalSpace,
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
                 child: state.maybeMap(
                   orElse: () => SizedBox.shrink(),
                   loadInProgress: (_) => Skeletonizer(
                     enabled: true,
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, item) => CustomWeeklyItemWidget(
+                    child: SizedBox(
+                      height: 200.h,
+                      width: double.infinity,
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, item) => CustomWeeklyItemWidget(
                           tempMax: 0,
                           tempMin: 0,
                           icon: '',
                           day: '',
                           temp: 20,
-                          description: ''),
-                      separatorBuilder: (context, item) => 40.horizontalSpace,
-                      itemCount: 4,
+                          description: '',
+                        ),
+                        separatorBuilder: (context, item) => 40.horizontalSpace,
+                        itemCount: 4,
+                      ),
                     ),
                   ),
                   loadSuccess: (value) {
@@ -96,34 +102,70 @@ class _CustomBottomSheetWidgetState
                         .where((date) => date.isAfter(today))
                         .take(6)
                         .toList();
-                    return ListView.separated(
-                      shrinkWrap: true,
-                      physics: BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final day = upcomingDays[index];
-                        final dayName = DateFormat.E('fr_FR').format(day);
-                        final resultWeekly =
-                            value.resultWeekly.listWeekly![index];
 
-                        return CustomWeeklyItemWidget(
-                          icon: resultWeekly.weather!.first.icon!,
-                          day: dayName.toString(),
-                          tempMax: resultWeekly.main!.tempMax,
-                          tempMin: resultWeekly.main!.tempMin,
-                          temp: resultWeekly.main!.temp!,
-                          description: resultWeekly.weather!.first.description
-                              .toString(),
-                        );
-                      },
-                      separatorBuilder: (context, index) => 25.horizontalSpace,
-                      itemCount: upcomingDays.length,
+                    final tomorrow =
+                        upcomingDays.isNotEmpty ? upcomingDays[0] : null;
+                    final tomorrowData = tomorrow != null
+                        ? value.resultWeekly.listWeekly!.firstWhere(
+                            (item) {
+                              final itemDate =
+                                  DateTime.fromMillisecondsSinceEpoch(
+                                      item.dt! * 1000);
+                              return DateTime(itemDate.year, itemDate.month,
+                                      itemDate.day) ==
+                                  tomorrow;
+                            },
+                          )
+                        : null;
+
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 200.h,
+                          child: ListView.separated(
+                            physics: BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              final day = upcomingDays[index];
+                              final dayName = DateFormat.E('fr_FR').format(day);
+                              final resultWeekly =
+                                  value.resultWeekly.listWeekly![index];
+
+                              return CustomWeeklyItemWidget(
+                                icon: resultWeekly.weather!.first.icon!,
+                                day: dayName.toString(),
+                                tempMax: resultWeekly.main!.tempMax,
+                                tempMin: resultWeekly.main!.tempMin,
+                                temp: resultWeekly.main!.temp!,
+                                description: resultWeekly
+                                    .weather!.first.description
+                                    .toString(),
+                              );
+                            },
+                            separatorBuilder: (context, index) =>
+                                25.horizontalSpace,
+                            itemCount: upcomingDays.length,
+                          ),
+                        ),
+                        if (tomorrowData != null)
+                          CustomTomorrowWidget(
+                            description: tomorrowData.weather!.first.description
+                                .toString(),
+                            tempMax: tomorrowData.main!.tempMax!
+                                .roundTemp()
+                                .toDouble(),
+                            icon: tomorrowData.weather!.first.icon,
+                            tempMin: tomorrowData.main!.tempMin!
+                                .roundTemp()
+                                .toDouble(),
+                          ),
+                      ],
                     );
                   },
                 ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
