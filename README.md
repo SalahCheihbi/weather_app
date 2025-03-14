@@ -59,7 +59,7 @@ git clone https://github.com/votre-repo/weather-app.git
 cd weather-app
 ```
     
-2. Créer un fichier .env et configurer l’API Key
+2. Créer un fichier .env.prod & .env.dev et configurer l’API Key
 
 3. Générer les fichiers nécessaires avec build_runner
 ```
