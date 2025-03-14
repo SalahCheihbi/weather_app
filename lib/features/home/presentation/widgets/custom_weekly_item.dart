@@ -13,6 +13,8 @@ class CustomWeeklyItemWidget extends StatelessWidget {
   final String? icon;
   final double? tempMax;
   final double? tempMin;
+  final double height;
+  final double width;
   const CustomWeeklyItemWidget({
     super.key,
     required this.day,
@@ -21,6 +23,8 @@ class CustomWeeklyItemWidget extends StatelessWidget {
     required this.description,
     this.tempMax,
     this.tempMin,
+    this.height = 60,
+    this.width = 60,
   });
 
   @override
@@ -29,8 +33,8 @@ class CustomWeeklyItemWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 60,
-          height: 60,
+          width: width,
+          height: height,
           decoration: BoxDecoration(
             color: greyColor,
             borderRadius: BorderRadius.circular(14.r),
@@ -53,10 +57,12 @@ class CustomWeeklyItemWidget extends StatelessWidget {
                         ? ColorFilter.mode(
                             theme.colorScheme.primary, BlendMode.srcIn)
                         : null,
-                    placeholderBuilder: (BuildContext context) =>
-                        Icon(Icons.image, size: 30.r),
                   )
-                : Icon(Icons.image, size: 30.r),
+                : Icon(
+                    Icons.image,
+                    size: 30.r,
+                    color: theme.colorScheme.primary,
+                  ),
           ),
         ),
         5.verticalSpace,
