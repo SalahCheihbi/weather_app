@@ -35,6 +35,12 @@ L'application utilise des fichiers .env pour stocker les variables sensibles :
 
 `OPENWEATHER_ACCESS_TOKEN: OPENWEATHER_ACCESS_TOKEN`
 
+🛠️ Exemple de .env.dev :
+
+`BASE_URL: https://api.openweathermap.org`
+
+`OPENWEATHER_ACCESS_TOKEN: OPENWEATHER_ACCESS_TOKEN`
+
 📌 Fonctionnalités
 
  Récupération des données météo (actuelles & prévisions) 📊
