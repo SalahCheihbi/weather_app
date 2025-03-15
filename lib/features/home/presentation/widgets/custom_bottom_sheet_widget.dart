@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:weather_app/core/infrastructure/extensions/temperature_extension.dart';
-import 'package:weather_app/features/home/presentation/widgets/custom_tomorrow_widget.dart';
+import '../../../../core/infrastructure/extensions/temperature_extension.dart';
+import 'custom_tomorrow_widget.dart';
 import 'custom_weekly_item.dart';
 import '../../../../theme/colors.dart';
 
@@ -29,6 +29,16 @@ class _CustomBottomSheetWidgetState
   @override
   void initState() {
     super.initState();
+    Future.microtask(
+        () => ref.read(weeklyWeatherNotifier.notifier).getWeeklyWeather(
+              lat: widget.lat,
+              lon: widget.lon,
+            ));
+  }
+
+  @override
+  void didUpdateWidget(covariant CustomBottomSheetWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
     Future.microtask(
         () => ref.read(weeklyWeatherNotifier.notifier).getWeeklyWeather(
               lat: widget.lat,
@@ -64,7 +74,7 @@ class _CustomBottomSheetWidgetState
               ),
               20.verticalSpace,
               Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: state.maybeMap(
                   orElse: () => SizedBox.shrink(),
                   loadInProgress: (_) => Skeletonizer(

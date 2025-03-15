@@ -105,7 +105,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                           ),
                         ),
                         subtitle: Text(
-                          "${city.localNames!.ar}, ",
+                          "${city.localNames?.ar ?? ''}, ",
                           style: theme.textTheme.labelMedium?.copyWith(
                             color: theme.colorScheme.primary,
                             fontWeight: FontWeight.w600,

@@ -69,18 +69,18 @@ class CustomWeeklyItemWidget extends StatelessWidget {
         Text(
           day.capitalize.replaceAll('.', ''),
           style: theme.textTheme.titleSmall?.copyWith(
-              color: blackColor, fontSize: 12, fontWeight: FontWeight.w500),
+              color: blackColor, fontSize: 12.sp, fontWeight: FontWeight.w500),
         ),
         Text(
           '${temp.roundTemp()}°',
           style: theme.textTheme.titleSmall?.copyWith(
-              color: blackColor, fontSize: 14, fontWeight: FontWeight.w800),
+              color: blackColor, fontSize: 18.sp, fontWeight: FontWeight.w800),
         ),
         Text(
           description,
           style: theme.textTheme.titleSmall?.copyWith(
             color: theme.colorScheme.primary,
-            fontSize: 12,
+            fontSize: 10.sp,
             fontWeight: FontWeight.w400,
           ),
         ),
