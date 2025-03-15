@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:weather_app/core/infrastructure/extensions/extebsion.dart';
+import 'package:weather_app/core/infrastructure/extensions/times_tamp_formatter.dart';
 import '../../../../theme/colors.dart';
 
 import 'weather_state_item.dart';
