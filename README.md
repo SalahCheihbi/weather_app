@@ -55,7 +55,7 @@ L'application utilise des fichiers .env pour stocker les variables sensibles :
 1. Cloner le projet
 
 ```
-git clone https://github.com/SalahCheihbi/weather-app.git
+git clone https://github.com/SalahCheihbi/weather_app.git
 cd weather-app
 ```
     
