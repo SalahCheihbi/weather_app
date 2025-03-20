@@ -56,7 +56,7 @@ L'application utilise des fichiers .env pour stocker les variables sensibles :
 
 ```
 git clone https://github.com/SalahCheihbi/weather_app.git
-cd weather-app
+cd weather_app
 ```
     
 2. Créer un fichier .env.prod & .env.dev et configurer l’API Key
