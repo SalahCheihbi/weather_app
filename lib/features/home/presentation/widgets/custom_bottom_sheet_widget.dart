@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
 import '../../../../core/infrastructure/extensions/temperature_extension.dart';
+import '../../../../theme/colors.dart';
+import '../../shared/providers.dart';
 import 'custom_tomorrow_widget.dart';
 import 'custom_weekly_item.dart';
-import '../../../../theme/colors.dart';
-
-import '../../shared/providers.dart';
 
 class CustomBottomSheetWidget extends StatefulHookConsumerWidget {
-  final double lat;
-  final double lon;
   const CustomBottomSheetWidget({
     super.key,
     required this.lat,
     required this.lon,
   });
+
+  final double lat;
+  final double lon;
 
   @override
   ConsumerState<CustomBottomSheetWidget> createState() =>
@@ -27,30 +29,25 @@ class CustomBottomSheetWidget extends StatefulHookConsumerWidget {
 class _CustomBottomSheetWidgetState
     extends ConsumerState<CustomBottomSheetWidget> {
   @override
-  void initState() {
-    super.initState();
-    Future.microtask(
-        () => ref.read(weeklyWeatherNotifier.notifier).getWeeklyWeather(
-              lat: widget.lat,
-              lon: widget.lon,
-            ));
-  }
-
-  @override
-  void didUpdateWidget(covariant CustomBottomSheetWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    Future.microtask(
-        () => ref.read(weeklyWeatherNotifier.notifier).getWeeklyWeather(
-              lat: widget.lat,
-              lon: widget.lon,
-            ));
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final prevLat = useState<double>(widget.lat);
+    final prevLon = useState<double>(widget.lon);
+
     final theme = Theme.of(context);
 
+    final notifier = ref.read(weeklyWeatherNotifier.notifier);
     final state = ref.watch(weeklyWeatherNotifier);
+
+    useEffect(() {
+      Future.microtask(() {
+        notifier.getWeeklyWeather(lat: widget.lat, lon: widget.lon);
+      });
+
+      prevLat.value = widget.lat;
+      prevLon.value = widget.lon;
+
+      return null;
+    }, [widget.lat, widget.lon]);
 
     return Container(
       width: double.infinity,

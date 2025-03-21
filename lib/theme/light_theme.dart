@@ -1,7 +1,9 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../gen/fonts.gen.dart';
+import 'colors.dart';
 
 const _primary = Color(0xff6a5acd);
 const _primaryContainer = Color(0xff483d8b);
@@ -35,8 +37,19 @@ final lightTheme = FlexThemeData.light(
         swapLegacyOnMaterial3: true,
         fontFamily: FontFamily.monaSans)
     .copyWith(
+        appBarTheme: AppBarTheme(
+          centerTitle: true,
+          iconTheme: IconThemeData(color: whiteColor),
+          backgroundColor: _primary,
+          foregroundColor: whiteColor,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: _primaryContainer,
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.dark,
+          ),
+        ),
         bottomSheetTheme: BottomSheetThemeData(
-  backgroundColor: Colors.transparent,
-));
+          backgroundColor: Colors.transparent,
+        ));
 
 //* theme Light mode

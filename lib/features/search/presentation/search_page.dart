@@ -1,12 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
-import '../../../theme/theme.dart';
 
 import '../../../core/presentation/widgets/widgets.dart';
+import '../../../theme/theme.dart';
 import '../domain/result_city.dart';
 import '../shared/provider.dart';
 
@@ -41,8 +40,6 @@ class _SearchPageState extends ConsumerState<SearchPage> {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: whiteColor,
-        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           "Rechercher une ville",
           style: theme.textTheme.headlineSmall?.copyWith(
@@ -51,14 +48,10 @@ class _SearchPageState extends ConsumerState<SearchPage> {
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios,
-              color: whiteColor), // Forcer la couleur en blanc
+          icon: Icon(
+            Icons.arrow_back_ios,
+          ),
           onPressed: () => context.router.pop(),
-        ),
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Theme.of(context).colorScheme.primaryContainer,
-          statusBarIconBrightness: Brightness.light,
-          statusBarBrightness: Brightness.dark,
         ),
       ),
       body: Padding(
@@ -85,7 +78,15 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                 orElse: () => const SizedBox.shrink(),
                 loadFailure: (value) {
                   Logger().e(value.failure);
-                  return Center(child: Text('Failed to load city data'));
+                  return Center(
+                    child: Text(
+                      'Échec du chargement des données de la ville',
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: theme.colorScheme.error,
+                        fontSize: 12,
+                      ),
+                    ),
+                  );
                 },
                 loadInProgress: (_) => const Center(
                       child: CustomLoadingWidget(),

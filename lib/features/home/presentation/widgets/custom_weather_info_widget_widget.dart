@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:weather_app/theme/colors.dart';
 
 class CustomWeatherInfoWidget extends StatelessWidget {
   const CustomWeatherInfoWidget({
@@ -27,7 +28,7 @@ class CustomWeatherInfoWidget extends StatelessWidget {
           Text(
             description,
             style: theme.textTheme.bodySmall?.copyWith(
-              color: Colors.white,
+              color: whiteColor,
               fontSize: 10.sp,
               fontWeight: FontWeight.w600,
             ),
