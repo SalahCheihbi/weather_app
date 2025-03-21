@@ -7,36 +7,37 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
-  auto_route: ^10.0.1
-  dio: ^5.8.0+1
-  envied: ^1.1.1
-  flex_color_scheme: ^8.1.1
+  auto_route: ^10.0.1 # Auto Route
+  dio: ^5.8.0+1 # Network
+  envied: ^1.1.1 # Environment Variables
+  flex_color_scheme: ^8.1.1 # Color Scheme
   flutter:
     sdk: flutter
-  flutter_hooks: ^0.21.2
-  flutter_screenutil: ^5.9.3
+  flutter_hooks: ^0.21.2 # Hooks
+  flutter_screenutil: ^5.9.3 # Screen Util
   flutter_svg: ^2.0.17
-  fpdart: ^1.1.1
-  freezed_annotation: ^2.4.4
-  hooks_riverpod: ^2.6.1
+  fpdart: ^1.1.1 # Functional Programming
+  freezed_annotation: ^2.4.4 # Freezed
+  hooks_riverpod: ^2.6.1 # Riverpod
   intl: ^0.20.2
-  json_annotation: ^4.9.0
-  logger: ^2.5.0
-  skeletonizer: ^1.4.3
+  json_annotation: ^4.9.0 # JSON Serialization
+  logger: ^2.5.0 # Logger
+  skeletonizer: ^1.4.3 # Skeleton Loader
 
 dev_dependencies:
-  auto_route_generator: null
-  build_runner: ^2.4.15
-  custom_lint: ^0.7.0
-  envied_generator: ^1.1.1
-  flutter_gen_runner: ^5.5.0+1
-  flutter_lints: ^5.0.0
+  auto_route_generator: null # Auto Route Generator
+  build_runner: ^2.4.15 # Build Runner
+  custom_lint: ^0.7.0 # Custom Lint
+  envied_generator: ^1.1.1 # Environment Variables Generator
+  flutter_gen_runner: ^5.5.0+1 # Flutter Gen Runner
+  flutter_lints: ^5.0.0 # Flutter Lints
   flutter_test:
     sdk: flutter
-  freezed: ^2.5.8
-  json_serializable: ^6.9.4
-  lint: ^2.3.0
-  riverpod_lint: ^2.6.2
+  freezed: ^2.5.8 # Freezed
+  json_serializable: ^6.9.4 # JSON Serialization
+  lint: ^2.3.0 # Lint
+  riverpod_lint: ^2.6.2 # Riverpod Lint
+  mockito: ^5.4.5 # Mocking
 
 flutter:
   uses-material-design: true

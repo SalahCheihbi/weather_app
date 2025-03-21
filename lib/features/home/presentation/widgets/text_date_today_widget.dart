@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/utils/functions.dart';
+import '../../../../theme/colors.dart';
 
 class TextDateTodayWidget extends StatelessWidget {
   const TextDateTodayWidget({super.key});
@@ -15,7 +16,7 @@ class TextDateTodayWidget extends StatelessWidget {
       child: Text(
         formattedDate(),
         style: theme.textTheme.bodyMedium?.copyWith(
-          color: Colors.white,
+          color: whiteColor,
           fontSize: 14,
           fontWeight: FontWeight.w400,
         ),
